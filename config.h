@@ -26,7 +26,6 @@ static char *colors[][3] = {
        /*               fg           bg           border   */
       [SchemeNorm] = { normfgcolor, normbgcolor, normbordercolor },
       [SchemeSel]  = { selfgcolor,  selbgcolor,  selbordercolor  },
-
       [SchemeStatus]  = { normfgcolor, normbgcolor, normbordercolor }, // Statusbar right {text,background,not used but cannot be empty}
       [SchemeTagsSel]  = { selfgcolor,  selbgcolor,  selbordercolor  }, // Tagbar left selected {text,background,not used but cannot be empty}
       [SchemeTagsNorm]  = { normfgcolor, normbgcolor, normbordercolor }, // Tagbar left unselected {text,background,not used but cannot be empty}
@@ -93,55 +92,55 @@ static Key keys[] = {
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
 	{ MODKEY,			                  XK_0,		   view,		       {.ui = ~0 } },
-	{ MODKEY|ShiftMask,		          XK_0,		   tag,		         {.ui = ~0 } },
+/* para q sirve? */
+	/* { MODKEY|ShiftMask,		          XK_0,		   tag,		         {.ui = ~0 } }, */
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
 	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
 	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
+	{ MODKEY,			                  XK_a,		   togglegaps,	   {0} },
+	{ MODKEY|ShiftMask,		          XK_a,		   defaultgaps,	   {0} },
+	{ MODKEY,			                  XK_z,		   incrgaps,	     {.i = +3 } },
+	{ MODKEY,			                  XK_x,		   incrgaps,	     {.i = -3 } },
 	{ MODKEY,			                  XK_Return, spawn,		       {.v = termcmd } },
-	/* { MODKEY|ShiftMask,		XK_Return,	togglescratch,	{.ui = 0} }, */
+	{ MODKEY,			                  XK_s,		   togglesticky,	 {0} },
+	{ MODKEY,			                  XK_b,		   togglebar,	     {0} },
+/* patch scrachpad, para tener una terminal q sale flotante */
+	/* { MODKEY|ShiftMask,		          XK_Return, togglescratch,	 {.ui = 0} }, */
 	{ MODKEY,			                  XK_w,		   spawn,		       SHCMD("$BROWSER") },
 	{ MODKEY,                       XK_f,      togglefullscr,  {0} },
 	{ MODKEY,			                  XK_grave,	 spawn,	         SHCMD("dmenuunicode") }, /*emoji*/
-
 	{ MODKEY,			                  XK_space,	 zoom,		       {0} },
+/* modo ventana flotante */
 	{ MODKEY|ShiftMask,		          XK_space,	 togglefloating, {0} },
-
 	{ MODKEY,			                  XK_minus,	 spawn,		       SHCMD("pamixer --allow-boost -d 5; kill -44 $(pidof dwmblocks)") },
 	{ MODKEY|ShiftMask,		          XK_minus,	 spawn,		       SHCMD("pamixer --allow-boost -d 15; kill -44 $(pidof dwmblocks)") },
 	{ MODKEY,			                  XK_equal,	 spawn,		       SHCMD("pamixer --allow-boost -i 5; kill -44 $(pidof dwmblocks)") },
 	{ MODKEY|ShiftMask,		          XK_equal,	 spawn,		       SHCMD("pamixer --allow-boost -i 15; kill -44 $(pidof dwmblocks)") },
-
+	{ MODKEY,			                  XK_m,		   spawn,		       SHCMD(TERMINAL " -e ncmpcpp") },
+	{ MODKEY|ShiftMask,		          XK_m,		   spawn,		       SHCMD("pamixer -t; kill -44 $(pidof dwmblocks)") },
 	{ MODKEY,			                  XK_BackSpace,	spawn,		   SHCMD("sysact") },
-	{ MODKEY|ShiftMask,		          XK_BackSpace,	spawn,		   SHCMD("sysact") },
 	{ MODKEY,			                  XK_q,		   killclient,	   {0} },
+	{ MODKEY|ShiftMask,             XK_q,      quit,           {1} }, 
 	{ MODKEY,			                  XK_r,		   spawn,		       SHCMD(TERMINAL " -e lf") },
 	{ MODKEY|ShiftMask,		          XK_r,		   spawn,		       SHCMD(TERMINAL " -e htop") },
-	/* { MODKEY|ShiftMask,		XK_Return,	togglescratch,	{.ui = 0} }, */
 	{ MODKEY,			                  XK_p,			 spawn,		       SHCMD("mpc toggle") },
 	{ MODKEY|ShiftMask,		          XK_p,			 spawn,		       SHCMD("mpc pause ; pauseallmpv") },
 	{ MODKEY,			                  XK_bracketleft,		spawn,	 SHCMD("mpc seek -10") },
 	{ MODKEY|ShiftMask,		          XK_bracketleft,		spawn,	 SHCMD("mpc seek -60") },
 	{ MODKEY,			                  XK_bracketright,	spawn,	 SHCMD("mpc seek +10") },
 	{ MODKEY|ShiftMask,		          XK_bracketright,	spawn,	 SHCMD("mpc seek +60") },
-	{ MODKEY,			                  XK_backslash,		view,		   {0} },
-	{ MODKEY,			                  XK_a,		   togglegaps,	   {0} },
-	{ MODKEY|ShiftMask,		          XK_a,		   defaultgaps,	   {0} },
-	{ MODKEY,			                  XK_z,		   incrgaps,	     {.i = +3 } },
-	{ MODKEY,			                  XK_x,		   incrgaps,	     {.i = -3 } },
-	{ MODKEY,			                  XK_s,		   togglesticky,	 {0} },
-	/* { MODKEY|ShiftMask,		XK_s,		spawn,		SHCMD("") }, */
+	{ MODKEY,			                  XK_backslash,		  view,		 {0} },
 	{ MODKEY,			                  XK_d,		   spawn,          SHCMD("dmenu_run") },
 	{ MODKEY|ShiftMask,		          XK_d,		   spawn,		       SHCMD("passmenu") },
-	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
-	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
-	{ MODKEY,			                  XK_b,		   togglebar,	     {0} },
-
+	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
+	{ MODKEY,                       XK_y,      setlayout,      {.v = &layouts[1]} },
+	{ MODKEY,                       XK_u,      setlayout,      {.v = &layouts[2]} },
 	{ MODKEY,			                  XK_F1,		 spawn,		       SHCMD("groff -mom /usr/local/share/dwm/larbs.mom -Tpdf | zathura -") },
 	{ MODKEY,			                  XK_F2,		 spawn,		       SHCMD("tutorialvids") },
 	{ MODKEY,			                  XK_F3,		 spawn,		       SHCMD("displayselect") },
 	{ MODKEY,			                  XK_F4,		 spawn,		       SHCMD(TERMINAL " -e pulsemixer; kill -44 $(pidof dwmblocks)") },
-	/* { MODKEY,			                  XK_F5,		 xrdb,		       {.v = NULL } }, */
+	{ MODKEY,			                  XK_F5,		 xrdb,		       {.v = NULL } },
 	{ MODKEY,			                  XK_F6,		 spawn,		       SHCMD("torwrap") },
 	{ MODKEY,			                  XK_F7,		 spawn,		       SHCMD("td-toggle") },
 	{ MODKEY,			                  XK_F8,		 spawn,		       SHCMD("mw -Y") },
@@ -149,96 +148,34 @@ static Key keys[] = {
 	{ MODKEY,			                  XK_F10,		 spawn,		       SHCMD("dmenuumount") },
 	{ MODKEY,			                  XK_F11,		 spawn,		       SHCMD("mpv --no-cache --no-osc --no-input-default-bindings --profile=low-latency --input-conf=/dev/null --title=webcam $(ls /dev/video[0,2,4,6,8] | tail -n 1)") },
 	{ MODKEY,			                  XK_F12,		 spawn,		       SHCMD("remaps & notify-send \\\"⌨️ Keyboard remapping...\\\" \\\"Re-running keyboard defaults for any newly plugged-in keyboards.\\\"") },
-
-	{ 0, XF86XK_AudioMute,		spawn,		SHCMD("pamixer -t; kill -44 $(pidof dwmblocks)") },
-	{ 0, XF86XK_AudioRaiseVolume,	spawn,		SHCMD("pamixer --allow-boost -i 3; kill -44 $(pidof dwmblocks)") },
-	{ 0, XF86XK_AudioLowerVolume,	spawn,		SHCMD("pamixer --allow-boost -d 3; kill -44 $(pidof dwmblocks)") },
-	{ 0, XF86XK_AudioPrev,		spawn,		SHCMD("mpc prev") },
-	{ 0, XF86XK_AudioNext,		spawn,		SHCMD("mpc next") },
-	{ 0, XF86XK_AudioPause,		spawn,		SHCMD("mpc pause") },
-	{ 0, XF86XK_AudioPlay,		spawn,		SHCMD("mpc play") },
-	{ 0, XF86XK_AudioStop,		spawn,		SHCMD("mpc stop") },
-	{ 0, XF86XK_AudioRewind,	spawn,		SHCMD("mpc seek -10") },
-	{ 0, XF86XK_AudioForward,	spawn,		SHCMD("mpc seek +10") },
-	{ 0, XF86XK_AudioMedia,		spawn,		SHCMD(TERMINAL " -e ncmpcpp") },
-	{ 0, XF86XK_AudioMicMute,	spawn,		SHCMD("pactl set-source-mute @DEFAULT_SOURCE@ toggle") },
-	{ 0, XF86XK_PowerOff,		spawn,		SHCMD("sysact") },
-	{ 0, XF86XK_Calculator,		spawn,		SHCMD(TERMINAL " -e bc -l") },
-	{ 0, XF86XK_Sleep,		spawn,		SHCMD("sudo -A zzz") },
-	{ 0, XF86XK_WWW,		spawn,		SHCMD("$BROWSER") },
-	{ 0, XF86XK_DOS,		spawn,		SHCMD(TERMINAL) },
-	{ 0, XF86XK_ScreenSaver,	spawn,		SHCMD("slock & xset dpms force off; mpc pause; pauseallmpv") },
-	{ 0, XF86XK_TaskPane,		spawn,		SHCMD(TERMINAL " -e htop") },
-	{ 0, XF86XK_Mail,		spawn,		SHCMD(TERMINAL " -e neomutt ; pkill -RTMIN+12 dwmblocks") },
-	{ 0, XF86XK_MyComputer,		spawn,		SHCMD(TERMINAL " -e lf /") },
-	/* { 0, XF86XK_Battery,		spawn,		SHCMD("") }, */
-	{ 0, XF86XK_Launch1,		spawn,		SHCMD("xset dpms force off") },
-	{ 0, XF86XK_TouchpadToggle,	spawn,		SHCMD("(synclient | grep 'TouchpadOff.*1' && synclient TouchpadOff=0) || synclient TouchpadOff=1") },
-	{ 0, XF86XK_TouchpadOff,	spawn,		SHCMD("synclient TouchpadOff=1") },
-	{ 0, XF86XK_TouchpadOn,		spawn,		SHCMD("synclient TouchpadOff=0") },
-
-	/* { MODKEY|Mod4Mask,              XK_h,      incrgaps,       {.i = +1 } }, */
-	/* { MODKEY|Mod4Mask,              XK_l,      incrgaps,       {.i = -1 } }, */
-	/* { MODKEY|Mod4Mask|ShiftMask,    XK_h,      incrogaps,      {.i = +1 } }, */
-	/* { MODKEY|Mod4Mask|ShiftMask,    XK_l,      incrogaps,      {.i = -1 } }, */
-	/* { MODKEY|Mod4Mask|ControlMask,  XK_h,      incrigaps,      {.i = +1 } }, */
-	/* { MODKEY|Mod4Mask|ControlMask,  XK_l,      incrigaps,      {.i = -1 } }, */
-	/* { MODKEY|Mod4Mask|ShiftMask,    XK_0,      defaultgaps,    {0} }, */
-	/* { MODKEY,                       XK_y,      incrihgaps,     {.i = +1 } }, */
-	/* { MODKEY,                       XK_o,      incrihgaps,     {.i = -1 } }, */
-	/* { MODKEY|ControlMask,           XK_y,      incrivgaps,     {.i = +1 } }, */
-	/* { MODKEY|ControlMask,           XK_o,      incrivgaps,     {.i = -1 } }, */
-	/* { MODKEY|Mod4Mask,              XK_y,      incrohgaps,     {.i = +1 } }, */
-	/* { MODKEY|Mod4Mask,              XK_o,      incrohgaps,     {.i = -1 } }, */
-	/* { MODKEY|ShiftMask,             XK_y,      incrovgaps,     {.i = +1 } }, */
-	/* { MODKEY|ShiftMask,             XK_o,      incrovgaps,     {.i = -1 } }, */
-
-	/* { 0, XF86XK_MonBrightnessUp,	spawn,		SHCMD("xbacklight -inc 15") }, */
-	/* { 0, XF86XK_MonBrightnessDown,	spawn,		SHCMD("xbacklight -dec 15") }, */
-	{ 0, XF86XK_MonBrightnessUp,	spawn,		SHCMD("xbacklight -inc 1") },
-	{ 0, XF86XK_MonBrightnessDown,	spawn,		SHCMD("xbacklight -dec 1") },
-
-
-
-
-
-	/* { MODKEY,                       XK_b,      togglebar,      {0} }, */
-	/* { MODKEY,                       XK_i,      incnmaster,     {.i = +1 } }, */
-	/* { MODKEY,                       XK_d,      incnmaster,     {.i = -1 } }, */
-	/* { MODKEY|Mod4Mask,              XK_h,      incrgaps,       {.i = +1 } }, */
-	/* { MODKEY|Mod4Mask,              XK_l,      incrgaps,       {.i = -1 } }, */
-	/* { MODKEY|Mod4Mask|ShiftMask,    XK_h,      incrogaps,      {.i = +1 } }, */
-	/* { MODKEY|Mod4Mask|ShiftMask,    XK_l,      incrogaps,      {.i = -1 } }, */
-	/* { MODKEY|Mod4Mask|ControlMask,  XK_h,      incrigaps,      {.i = +1 } }, */
-	/* { MODKEY|Mod4Mask|ControlMask,  XK_l,      incrigaps,      {.i = -1 } }, */
-	/* { MODKEY|Mod4Mask,              XK_0,      togglegaps,     {0} }, */
-	/* { MODKEY|Mod4Mask|ShiftMask,    XK_0,      defaultgaps,    {0} }, */
-	/* { MODKEY,                       XK_y,      incrihgaps,     {.i = +1 } }, */
-	/* { MODKEY,                       XK_o,      incrihgaps,     {.i = -1 } }, */
-	/* { MODKEY|ControlMask,           XK_y,      incrivgaps,     {.i = +1 } }, */
-	/* { MODKEY|ControlMask,           XK_o,      incrivgaps,     {.i = -1 } }, */
-	/* { MODKEY|Mod4Mask,              XK_y,      incrohgaps,     {.i = +1 } }, */
-	/* { MODKEY|Mod4Mask,              XK_o,      incrohgaps,     {.i = -1 } }, */
-	/* { MODKEY|ShiftMask,             XK_y,      incrovgaps,     {.i = +1 } }, */
-	/* { MODKEY|ShiftMask,             XK_o,      incrovgaps,     {.i = -1 } }, */
-  /* { MODKEY,                       XK_s,      togglesticky,   {0} }, */
-	/* { MODKEY,                       XK_Return, zoom,           {0} }, */
-	/* { MODKEY,                       XK_Tab,    view,           {0} }, */
-	/* { MODKEY|ShiftMask,             XK_c,      killclient,     {0} }, */
-  /* { MODKEY,                       XK_s,      togglesticky,   {0} }, */
-	/* { MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} }, */
-	/* /1* { MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} }, *1/ */
-	/* /1* { MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} }, *1/ */
-	/* { MODKEY,                       XK_space,  setlayout,      {0} }, */
-	/* { MODKEY|ShiftMask,             XK_space,  togglefloating, {0} }, */
-	/* { MODKEY,                       XK_0,      view,           {.ui = ~0 } }, */
-	/* { MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } }, */
-	/* { MODKEY,                       XK_comma,  focusmon,       {.i = -1 } }, */
-	/* { MODKEY,                       XK_period, focusmon,       {.i = +1 } }, */
-	/* { MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } }, */
-	/* { MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } }, */
-	/* { MODKEY|ShiftMask,             XK_q,      quit,           {0} }, */
-	{ MODKEY|ControlMask|ShiftMask, XK_q,      quit,           {1} }, 
+	{ 0, XF86XK_AudioMute,		                 spawn,		       SHCMD("pamixer -t; kill -44 $(pidof dwmblocks)") },
+	{ 0, XF86XK_AudioRaiseVolume,	             spawn,          SHCMD("pamixer --allow-boost -i 3; kill -44 $(pidof dwmblocks)") },
+	{ 0, XF86XK_AudioLowerVolume,	             spawn,          SHCMD("pamixer --allow-boost -d 3; kill -44 $(pidof dwmblocks)") },
+	{ 0, XF86XK_AudioPrev,		                 spawn,          SHCMD("mpc prev") },
+	{ 0, XF86XK_AudioNext,		                 spawn,          SHCMD("mpc next") },
+	{ 0, XF86XK_AudioPause,		                 spawn,          SHCMD("mpc pause") },
+	{ 0, XF86XK_AudioPlay,		                 spawn,          SHCMD("mpc play") },
+	{ 0, XF86XK_AudioStop,		                 spawn,          SHCMD("mpc stop") },
+	{ 0, XF86XK_AudioRewind,	                 spawn,          SHCMD("mpc seek -10") },
+	{ 0, XF86XK_AudioForward,	                 spawn,          SHCMD("mpc seek +10") },
+	{ 0, XF86XK_AudioMedia,		                 spawn,          SHCMD(TERMINAL " -e ncmpcpp") },
+	{ 0, XF86XK_AudioMicMute,	                 spawn,          SHCMD("pactl set-source-mute @DEFAULT_SOURCE@ toggle") },
+	{ 0, XF86XK_PowerOff,		                   spawn,          SHCMD("sysact") },
+	{ 0, XF86XK_Calculator,		                 spawn,          SHCMD(TERMINAL " -e bc -l") },
+	{ 0, XF86XK_Sleep,		                     spawn,          SHCMD("sudo -A zzz") },
+	{ 0, XF86XK_WWW,		                       spawn,          SHCMD("$BROWSER") },
+	{ 0, XF86XK_DOS,		                       spawn,          SHCMD(TERMINAL) },
+	{ 0, XF86XK_ScreenSaver,	                 spawn,          SHCMD("slock & xset dpms force off; mpc pause; pauseallmpv") },
+	{ 0, XF86XK_TaskPane,		                   spawn,          SHCMD(TERMINAL " -e htop") },
+	{ 0, XF86XK_Mail,		                       spawn,          SHCMD(TERMINAL " -e neomutt ; pkill -RTMIN+12 dwmblocks") },
+	{ 0, XF86XK_MyComputer,		                 spawn,          SHCMD(TERMINAL " -e lf /") },
+	{ 0, XF86XK_Battery,		                   spawn,          SHCMD("") },
+	{ 0, XF86XK_Launch1,		                   spawn,          SHCMD("xset dpms force off") },
+	{ 0, XF86XK_TouchpadToggle,	               spawn,          SHCMD("(synclient | grep 'TouchpadOff.*1' && synclient TouchpadOff=0) || synclient TouchpadOff=1") },
+	{ 0, XF86XK_TouchpadOff,                   spawn,          SHCMD("synclient TouchpadOff=1") },
+	{ 0, XF86XK_TouchpadOn,                    spawn,          SHCMD("synclient TouchpadOff=0") },
+	{ 0, XF86XK_MonBrightnessUp,               spawn,          SHCMD("xbacklight -inc 1") },
+	{ 0, XF86XK_MonBrightnessDown,             spawn,          SHCMD("xbacklight -dec 1") },
 };
 
 /* button definitions */
