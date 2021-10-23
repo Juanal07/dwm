@@ -24,7 +24,7 @@ static const char col_cyan[]        = "#005577";
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
-	[SchemeSel]  = { col_gray4, col_cyan,  col_cyan  },
+	[SchemeSel]  = { col_gray4, col_gray1,  col_cyan  },
 };
 
 /* tagging */
@@ -91,65 +91,57 @@ static Key keys[] = {
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
 	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
 	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
-
-	{ MODKEY,			XK_Return,	spawn,		{.v = termcmd } },
+	{ MODKEY,			                  XK_Return, spawn,		       {.v = termcmd } },
 	/* { MODKEY|ShiftMask,		XK_Return,	togglescratch,	{.ui = 0} }, */
-	{ MODKEY,			XK_w,		spawn,		SHCMD("$BROWSER") },
+	{ MODKEY,			                  XK_w,		   spawn,		       SHCMD("$BROWSER") },
+	{ MODKEY,                       XK_f,      togglefullscr,  {0} },
+	{ MODKEY,			                  XK_grave,	 spawn,	         SHCMD("dmenuunicode") }, /*emoji*/
 
-	{ MODKEY,             XK_f,      togglefullscr,  {0} },
+	{ MODKEY,			                  XK_space,	 zoom,		       {0} },
+	{ MODKEY|ShiftMask,		          XK_space,	 togglefloating, {0} },
 
-	{ MODKEY,			XK_minus,	spawn,		SHCMD("pamixer --allow-boost -d 5; kill -44 $(pidof dwmblocks)") },
-	{ MODKEY|ShiftMask,		XK_minus,	spawn,		SHCMD("pamixer --allow-boost -d 15; kill -44 $(pidof dwmblocks)") },
-	{ MODKEY,			XK_equal,	spawn,		SHCMD("pamixer --allow-boost -i 5; kill -44 $(pidof dwmblocks)") },
-	{ MODKEY|ShiftMask,		XK_equal,	spawn,		SHCMD("pamixer --allow-boost -i 15; kill -44 $(pidof dwmblocks)") },
+	{ MODKEY,			                  XK_minus,	 spawn,		       SHCMD("pamixer --allow-boost -d 5; kill -44 $(pidof dwmblocks)") },
+	{ MODKEY|ShiftMask,		          XK_minus,	 spawn,		       SHCMD("pamixer --allow-boost -d 15; kill -44 $(pidof dwmblocks)") },
+	{ MODKEY,			                  XK_equal,	 spawn,		       SHCMD("pamixer --allow-boost -i 5; kill -44 $(pidof dwmblocks)") },
+	{ MODKEY|ShiftMask,		          XK_equal,	 spawn,		       SHCMD("pamixer --allow-boost -i 15; kill -44 $(pidof dwmblocks)") },
 
-	{ MODKEY,			XK_BackSpace,	spawn,		SHCMD("sysact") },
-	{ MODKEY|ShiftMask,		XK_BackSpace,	spawn,		SHCMD("sysact") },
-
-
-	{ MODKEY,			XK_q,		killclient,	{0} },
-
-	{ MODKEY,			XK_r,		spawn,		SHCMD(TERMINAL " -e lf") },
-	{ MODKEY|ShiftMask,		XK_r,		spawn,		SHCMD(TERMINAL " -e htop") },
+	{ MODKEY,			                  XK_BackSpace,	spawn,		   SHCMD("sysact") },
+	{ MODKEY|ShiftMask,		          XK_BackSpace,	spawn,		   SHCMD("sysact") },
+	{ MODKEY,			                  XK_q,		   killclient,	   {0} },
+	{ MODKEY,			                  XK_r,		   spawn,		       SHCMD(TERMINAL " -e lf") },
+	{ MODKEY|ShiftMask,		          XK_r,		   spawn,		       SHCMD(TERMINAL " -e htop") },
 	/* { MODKEY|ShiftMask,		XK_Return,	togglescratch,	{.ui = 0} }, */
-
-	{ MODKEY,			XK_p,			spawn,		SHCMD("mpc toggle") },
-	{ MODKEY|ShiftMask,		XK_p,			spawn,		SHCMD("mpc pause ; pauseallmpv") },
-	{ MODKEY,			XK_bracketleft,		spawn,		SHCMD("mpc seek -10") },
-	{ MODKEY|ShiftMask,		XK_bracketleft,		spawn,		SHCMD("mpc seek -60") },
-	{ MODKEY,			XK_bracketright,	spawn,		SHCMD("mpc seek +10") },
-	{ MODKEY|ShiftMask,		XK_bracketright,	spawn,		SHCMD("mpc seek +60") },
-	{ MODKEY,			XK_backslash,		view,		{0} },
-
-
-	{ MODKEY,			XK_a,		togglegaps,	{0} },
-	{ MODKEY|ShiftMask,		XK_a,		defaultgaps,	{0} },
-	{ MODKEY,			XK_z,		incrgaps,	{.i = +3 } },
-	{ MODKEY,			XK_x,		incrgaps,	{.i = -3 } },
-
-	{ MODKEY,			XK_s,		togglesticky,	{0} },
+	{ MODKEY,			                  XK_p,			 spawn,		       SHCMD("mpc toggle") },
+	{ MODKEY|ShiftMask,		          XK_p,			 spawn,		       SHCMD("mpc pause ; pauseallmpv") },
+	{ MODKEY,			                  XK_bracketleft,		spawn,	 SHCMD("mpc seek -10") },
+	{ MODKEY|ShiftMask,		          XK_bracketleft,		spawn,	 SHCMD("mpc seek -60") },
+	{ MODKEY,			                  XK_bracketright,	spawn,	 SHCMD("mpc seek +10") },
+	{ MODKEY|ShiftMask,		          XK_bracketright,	spawn,	 SHCMD("mpc seek +60") },
+	{ MODKEY,			                  XK_backslash,		view,		   {0} },
+	{ MODKEY,			                  XK_a,		   togglegaps,	   {0} },
+	{ MODKEY|ShiftMask,		          XK_a,		   defaultgaps,	   {0} },
+	{ MODKEY,			                  XK_z,		   incrgaps,	     {.i = +3 } },
+	{ MODKEY,			                  XK_x,		   incrgaps,	     {.i = -3 } },
+	{ MODKEY,			                  XK_s,		   togglesticky,	 {0} },
 	/* { MODKEY|ShiftMask,		XK_s,		spawn,		SHCMD("") }, */
-	{ MODKEY,			XK_d,		spawn,          SHCMD("dmenu_run") },
-	{ MODKEY|ShiftMask,		XK_d,		spawn,		SHCMD("passmenu") },
+	{ MODKEY,			                  XK_d,		   spawn,          SHCMD("dmenu_run") },
+	{ MODKEY|ShiftMask,		          XK_d,		   spawn,		       SHCMD("passmenu") },
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
+	{ MODKEY,			                  XK_b,		   togglebar,	     {0} },
 
-
-	{ MODKEY,			XK_b,		togglebar,	{0} },
-
-
-	{ MODKEY,			XK_F1,		spawn,		SHCMD("groff -mom /usr/local/share/dwm/larbs.mom -Tpdf | zathura -") },
-	{ MODKEY,			XK_F2,		spawn,		SHCMD("tutorialvids") },
-	{ MODKEY,			XK_F3,		spawn,		SHCMD("displayselect") },
-	{ MODKEY,			XK_F4,		spawn,		SHCMD(TERMINAL " -e pulsemixer; kill -44 $(pidof dwmblocks)") },
-	/* { MODKEY,			XK_F5,		xrdb,		{.v = NULL } }, */
-	{ MODKEY,			XK_F6,		spawn,		SHCMD("torwrap") },
-	{ MODKEY,			XK_F7,		spawn,		SHCMD("td-toggle") },
-	{ MODKEY,			XK_F8,		spawn,		SHCMD("mw -Y") },
-	{ MODKEY,			XK_F9,		spawn,		SHCMD("dmenumount") },
-	{ MODKEY,			XK_F10,		spawn,		SHCMD("dmenuumount") },
-	{ MODKEY,			XK_F11,		spawn,		SHCMD("mpv --no-cache --no-osc --no-input-default-bindings --profile=low-latency --input-conf=/dev/null --title=webcam $(ls /dev/video[0,2,4,6,8] | tail -n 1)") },
-	{ MODKEY,			XK_F12,		spawn,		SHCMD("remaps & notify-send \\\"⌨️ Keyboard remapping...\\\" \\\"Re-running keyboard defaults for any newly plugged-in keyboards.\\\"") },
+	{ MODKEY,			                  XK_F1,		 spawn,		       SHCMD("groff -mom /usr/local/share/dwm/larbs.mom -Tpdf | zathura -") },
+	{ MODKEY,			                  XK_F2,		 spawn,		       SHCMD("tutorialvids") },
+	{ MODKEY,			                  XK_F3,		 spawn,		       SHCMD("displayselect") },
+	{ MODKEY,			                  XK_F4,		 spawn,		       SHCMD(TERMINAL " -e pulsemixer; kill -44 $(pidof dwmblocks)") },
+	/* { MODKEY,			                  XK_F5,		 xrdb,		       {.v = NULL } }, */
+	{ MODKEY,			                  XK_F6,		 spawn,		       SHCMD("torwrap") },
+	{ MODKEY,			                  XK_F7,		 spawn,		       SHCMD("td-toggle") },
+	{ MODKEY,			                  XK_F8,		 spawn,		       SHCMD("mw -Y") },
+	{ MODKEY,			                  XK_F9,		 spawn,		       SHCMD("dmenumount") },
+	{ MODKEY,			                  XK_F10,		 spawn,		       SHCMD("dmenuumount") },
+	{ MODKEY,			                  XK_F11,		 spawn,		       SHCMD("mpv --no-cache --no-osc --no-input-default-bindings --profile=low-latency --input-conf=/dev/null --title=webcam $(ls /dev/video[0,2,4,6,8] | tail -n 1)") },
+	{ MODKEY,			                  XK_F12,		 spawn,		       SHCMD("remaps & notify-send \\\"⌨️ Keyboard remapping...\\\" \\\"Re-running keyboard defaults for any newly plugged-in keyboards.\\\"") },
 
 	{ 0, XF86XK_AudioMute,		spawn,		SHCMD("pamixer -t; kill -44 $(pidof dwmblocks)") },
 	{ 0, XF86XK_AudioRaiseVolume,	spawn,		SHCMD("pamixer --allow-boost -i 3; kill -44 $(pidof dwmblocks)") },
