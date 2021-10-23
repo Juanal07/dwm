@@ -17,15 +17,21 @@ static const int topbar             = 1;        /* 0 means bottom bar */
 static const char *fonts[]          = { "Noto Sans Nerd Font:size=10","SourceHanSansCN:size=9" ,"JoyPixels:pixelsize=18:antialias=true:autohint=true" };
 static const char dmenufont[]       = "monospace:size=10";
 static char normbgcolor[]           = "#3c3836";
-static char normbordercolor[]       = "#282828";
+static char normbordercolor[]       = "#3c3836";
 static char normfgcolor[]           = "#ebdbb2";
-static char selbgcolor[]            = "#282828";
-static char selbordercolor[]        = "#282828";
-static char selfgcolor[]            = "#fabd2f";
+static char selbgcolor[]            = "#ebdbb2";
+static char selbordercolor[]        = "#3c3836";
+static char selfgcolor[]            = "#3c3836";
 static char *colors[][3] = {
        /*               fg           bg           border   */
-       [SchemeNorm] = { normfgcolor, normbgcolor, normbordercolor },
-       [SchemeSel]  = { selfgcolor,  selbgcolor,  selbordercolor  },
+      [SchemeNorm] = { normfgcolor, normbgcolor, normbordercolor },
+      [SchemeSel]  = { selfgcolor,  selbgcolor,  selbordercolor  },
+
+      [SchemeStatus]  = { normfgcolor, normbgcolor, normbordercolor }, // Statusbar right {text,background,not used but cannot be empty}
+      [SchemeTagsSel]  = { selfgcolor,  selbgcolor,  selbordercolor  }, // Tagbar left selected {text,background,not used but cannot be empty}
+      [SchemeTagsNorm]  = { normfgcolor, normbgcolor, normbordercolor }, // Tagbar left unselected {text,background,not used but cannot be empty}
+      [SchemeInfoSel]  = { normfgcolor, normbgcolor, normbordercolor }, // infobar middle  selected {text,background,not used but cannot be empty}
+      [SchemeInfoNorm]  = { normfgcolor, normbgcolor, normbordercolor }, // infobar middle  unselected {text,background,not used but cannot be empty}
 };
 
 /* tagging */
