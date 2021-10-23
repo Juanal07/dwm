@@ -14,7 +14,7 @@ static const unsigned int gappov    = 10;       /* vert outer gap between window
 static const int smartgaps          = 0;        /* 1 means no outer gap when there is only one window */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { "Noto Sans Nerd Font:size=10","SourceHanSansCN:size=9" ,"JoyPixels:pixelsize=18:antialias=true:autohint=true" };
+static const char *fonts[]          = { "NotoSans Nerd Font:size=10","SourceHanSansCN:size=9" ,"JoyPixels:pixelsize=18:antialias=true:autohint=true" };
 static const char dmenufont[]       = "monospace:size=10";
 static char normbgcolor[]           = "#3c3836";
 static char normbordercolor[]       = "#3c3836";
