@@ -96,7 +96,8 @@ static Key keys[] = {
 /* para q sirve? */
 	/* { MODKEY|ShiftMask,		          XK_0,		   tag,		         {.ui = ~0 } }, */
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
-	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
+	{ MODKEY|ShiftMask,            XK_j,      spawn,		       SHCMD("maim -so | xclip -selection clipboard -t image/png") },
+  { MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
 	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
 	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
 	{ MODKEY,			                  XK_a,		   togglegaps,	   {0} },
