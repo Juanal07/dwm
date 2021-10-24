@@ -76,6 +76,7 @@ static const Layout layouts[] = {
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbordercolor, "-sf", selfgcolor, NULL };
+static const char *roficmd[] = { "rofi", "-show", "drun", "-show-icons", NULL };
 static const char *termcmd[]  = { "st", NULL };
 
 #include <X11/XF86keysym.h>
@@ -131,7 +132,9 @@ static Key keys[] = {
 	{ MODKEY,			                  XK_bracketright,	spawn,	 SHCMD("mpc seek +10") },
 	{ MODKEY|ShiftMask,		          XK_bracketright,	spawn,	 SHCMD("mpc seek +60") },
 	{ MODKEY,			                  XK_backslash,		  view,		 {0} },
-	{ MODKEY,			                  XK_d,		   spawn,          SHCMD("dmenu_run") },
+	/* { MODKEY,			                  XK_d,		   spawn,          SHCMD("dmenu_run") }, */
+	/* { MODKEY,			                  XK_d,		   spawn,          {.v = roficmd } }, */
+	{ MODKEY,			                  XK_d,		   spawn,          SHCMD("rofi-test") },
 	{ MODKEY|ShiftMask,		          XK_d,		   spawn,		       SHCMD("passmenu") },
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
 	{ MODKEY,                       XK_y,      setlayout,      {.v = &layouts[1]} },
