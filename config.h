@@ -15,7 +15,8 @@ static const int smartgaps          = 0;        /* 1 means no outer gap when the
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 static const char *fonts[]          = { "NotoSans Nerd Font:size=10","SourceHanSansCN:size=9" ,"JoyPixels:pixelsize=18:antialias=true:autohint=true" };
-static const char dmenufont[]       = "monospace:size=10";
+/* static const char *fonts[]          = {"NotoSans Nerd Font:size=10"}; */
+static const char dmenufont[]       = { "NotoSans Nerd Font:size=10" };
 static char normbgcolor[]           = "#3c3836";
 static char normbordercolor[]       = "#3c3836";
 static char normfgcolor[]           = "#ebdbb2";
@@ -96,7 +97,6 @@ static Key keys[] = {
 /* para q sirve? */
 	/* { MODKEY|ShiftMask,		          XK_0,		   tag,		         {.ui = ~0 } }, */
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
-	{ MODKEY|ShiftMask,            XK_j,      spawn,		       SHCMD("maim -so | xclip -selection clipboard -t image/png") },
   { MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
 	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
 	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
@@ -106,6 +106,7 @@ static Key keys[] = {
 	{ MODKEY,			                  XK_x,		   incrgaps,	     {.i = -3 } },
 	{ MODKEY,			                  XK_Return, spawn,		       {.v = termcmd } },
 	{ MODKEY,			                  XK_s,		   togglesticky,	 {0} },
+	{ MODKEY|ShiftMask,             XK_s,      spawn,		       SHCMD("maim -so | xclip -selection clipboard -t image/png") },
 	{ MODKEY,			                  XK_b,		   togglebar,	     {0} },
 /* patch scrachpad, para tener una terminal q sale flotante */
 	/* { MODKEY|ShiftMask,		          XK_Return, togglescratch,	 {.ui = 0} }, */
@@ -119,8 +120,8 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,		          XK_minus,	 spawn,		       SHCMD("pamixer --allow-boost -d 15; kill -44 $(pidof dwmblocks)") },
 	{ MODKEY,			                  XK_equal,	 spawn,		       SHCMD("pamixer --allow-boost -i 5; kill -44 $(pidof dwmblocks)") },
 	{ MODKEY|ShiftMask,		          XK_equal,	 spawn,		       SHCMD("pamixer --allow-boost -i 15; kill -44 $(pidof dwmblocks)") },
-	{ MODKEY,			                  XK_m,		   spawn,		       SHCMD(TERMINAL " -e ncmpcpp") },
-	{ MODKEY|ShiftMask,		          XK_m,		   spawn,		       SHCMD("pamixer -t; kill -44 $(pidof dwmblocks)") },
+	{ MODKEY,		                    XK_m,		   spawn,		       SHCMD("pamixer -t; kill -44 $(pidof dwmblocks)") },
+	{ MODKEY|ShiftMask,			        XK_m,		   spawn,		       SHCMD(TERMINAL " -e ncmpcpp") },
 	{ MODKEY,			                  XK_BackSpace,	spawn,		   SHCMD("sysact") },
 	{ MODKEY,			                  XK_q,		   killclient,	   {0} },
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {1} }, 
