@@ -96,6 +96,10 @@ static Key keys[] = {
 	{ MODKEY,			                  XK_0,		   view,		       {.ui = ~0 } },
 /* para q sirve? */
 	/* { MODKEY|ShiftMask,		          XK_0,		   tag,		         {.ui = ~0 } }, */
+	{ MODKEY,			                  XK_q,		   killclient,	   {0} },
+	{ MODKEY|ShiftMask,             XK_q,      quit,           {1} }, 
+	{ MODKEY,			                  XK_w,		   spawn,		       SHCMD("$BROWSER") },
+	{ MODKEY,			                  XK_e,		   spawn,		       SHCMD("tmux-workspace") },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
   { MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
 	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
@@ -110,7 +114,6 @@ static Key keys[] = {
 	{ MODKEY,			                  XK_b,		   togglebar,	     {0} },
 /* patch scrachpad, para tener una terminal q sale flotante */
 	/* { MODKEY|ShiftMask,		          XK_Return, togglescratch,	 {.ui = 0} }, */
-	{ MODKEY,			                  XK_w,		   spawn,		       SHCMD("$BROWSER") },
 	{ MODKEY,                       XK_f,      togglefullscr,  {0} },
 	{ MODKEY,			                  XK_grave,	 spawn,	         SHCMD("dmenuunicode") }, /*emoji*/
 	{ MODKEY,			                  XK_space,	 zoom,		       {0} },
@@ -123,8 +126,6 @@ static Key keys[] = {
 	{ MODKEY,		                    XK_m,		   spawn,		       SHCMD("pamixer -t; kill -44 $(pidof dwmblocks)") },
 	{ MODKEY|ShiftMask,			        XK_m,		   spawn,		       SHCMD(TERMINAL " -e ncmpcpp") },
 	{ MODKEY,			                  XK_BackSpace,	spawn,		   SHCMD("sysact") },
-	{ MODKEY,			                  XK_q,		   killclient,	   {0} },
-	{ MODKEY|ShiftMask,             XK_q,      quit,           {1} }, 
 	{ MODKEY,			                  XK_r,		   spawn,		       SHCMD(TERMINAL " -e lf") },
 	{ MODKEY|ShiftMask,		          XK_r,		   spawn,		       SHCMD(TERMINAL " -e htop") },
 	{ MODKEY,			                  XK_p,			 spawn,		       SHCMD("mpc toggle") },
