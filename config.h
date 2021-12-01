@@ -100,6 +100,7 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {1} }, 
 	{ MODKEY,			                  XK_w,		   spawn,		       SHCMD("$BROWSER") },
 	{ MODKEY,			                  XK_e,		   spawn,		       SHCMD("tmux-workspace") },
+	{ MODKEY|ShiftMask,			        XK_e,		   spawn,		       SHCMD("tmux-old") },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
   { MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
 	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
