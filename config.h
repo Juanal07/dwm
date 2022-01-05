@@ -133,7 +133,7 @@ static Key keys[] = {
 	{ MODKEY,		                    XK_m,		   spawn,		       SHCMD("pamixer -t; kill -44 $(pidof dwmblocks)") },
 	{ MODKEY|ShiftMask,			        XK_m,		   spawn,		       SHCMD(TERMINAL " -e ncmpcpp") },
 	{ MODKEY,			                  XK_BackSpace,	spawn,		   SHCMD("sysact") },
-	{ MODKEY,			                  XK_r,		   spawn,		       SHCMD(TERMINAL " -e lf") },
+	{ MODKEY,			                  XK_r,		   spawn,		       SHCMD(TERMINAL " -e lf-image") },
 	{ MODKEY|ShiftMask,		          XK_r,		   spawn,		       SHCMD(TERMINAL " -e htop") },
 	{ MODKEY,			                  XK_p,			 spawn,		       SHCMD("mpc toggle") },
 	{ MODKEY|ShiftMask,		          XK_p,			 spawn,		       SHCMD("mpc pause ; pauseallmpv") },
