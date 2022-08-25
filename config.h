@@ -5,31 +5,36 @@
 #define TERMCLASS "St"
 
 /* appearance */
-static const unsigned int borderpx  = 1;        /* border pixel of windows */
-static const unsigned int snap      = 32;       /* snap pixel */
-static const unsigned int gappih    = 10;       /* horiz inner gap between windows */
-static const unsigned int gappiv    = 10;       /* vert inner gap between windows */
-static const unsigned int gappoh    = 10;       /* horiz outer gap between windows and screen edge */
-static const unsigned int gappov    = 10;       /* vert outer gap between windows and screen edge */
-static const int smartgaps          = 0;        /* 1 means no outer gap when there is only one window */
-static const int showbar            = 1;        /* 0 means no bar */
-static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { "NotoSans Nerd Font:size=10","SourceHanSansCN:size=9" ,"JoyPixels:pixelsize=18:antialias=true:autohint=true" };
-/* static const char *fonts[]          = {"NotoSans Nerd Font:size=10"}; */
+static unsigned int borderpx  = 1;        /* border pixel of windows */
+static unsigned int snap      = 32;       /* snap pixel */
 
-static const unsigned int systraypinning = 0;   /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
-static const unsigned int systrayonleft = 0;   	/* 0: systray in the right corner, >0: systray on left of status text */
-static const unsigned int systrayspacing = 2;   /* systray spacing */
-static const int systraypinningfailfirst = 1;   /* 1: if pinning fails, display systray on the first monitor, False: display systray on the last monitor*/
-static const int showsystray        = 1;     /* 0 means no systray */
+static unsigned int gappih    = 10;       /* horiz inner gap between windows */
+static unsigned int gappiv    = 10;       /* vert inner gap between windows */
+static unsigned int gappoh    = 10;       /* horiz outer gap between windows and screen edge */
+static unsigned int gappov    = 10;       /* vert outer gap between windows and screen edge */
+static int smartgaps          = 0;        /* 1 means no outer gap when there is only one window */
+// static int smartborders       = 1;        /* 1 means no outer gap when there is only one window */
 
-static const char dmenufont[]       = { "NotoSans Nerd Font:size=10" };
-static char normbgcolor[]           = "#3c3836";
-static char normbordercolor[]       = "#3c3836";
+static int showbar            = 1;        /* 0 means no bar */
+static int topbar             = 1;        /* 0 means bottom bar */
+
+static char *fonts[]          = { "NotoSans Nerd Font:size=10", "JoyPixels:pixelsize=18:antialias=true:autohint=true" };
+static char dmenufont[]       = { "NotoSans Nerd Font:size=10" };
+
+static unsigned int systraypinning = 0;   /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
+static unsigned int systrayonleft = 0;   	/* 0: systray in the right corner, >0: systray on left of status text */
+static unsigned int systrayspacing = 2;   /* systray spacing */
+static int systraypinningfailfirst = 1;   /* 1: if pinning fails, display systray on the first monitor, False: display systray on the last monitor*/
+static int showsystray        = 1;     /* 0 means no systray */
+
+static char normbgcolor[]           = "#282828";
+static char normbordercolor[]       = "#282828";
 static char normfgcolor[]           = "#ebdbb2";
+
 static char selbgcolor[]            = "#ebdbb2";
-static char selbordercolor[]        = "#3c3836";
-static char selfgcolor[]            = "#3c3836";
+static char selbordercolor[]        = "#ebdbb2";
+static char selfgcolor[]            = "#282828";
+
 static char *colors[][3] = {
        /*               fg           bg           border   */
       [SchemeNorm] = { normfgcolor, normbgcolor, normbordercolor },
@@ -42,8 +47,9 @@ static char *colors[][3] = {
 };
 
 /* tagging */
-static const char *tags[] = { "一", "二", "三", "四", "五", "六", "七", "八", "九" };
-/* static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" }; */
+// static const char *tags[] = { "一", "二", "三", "四", "五", "六", "七", "八", "九" };
+// static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
+static const char *tags[] = { "  ", "  ", "  ", "  ", "  ", " 6 ", " 7 ", " 8 ", "  " };
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -51,8 +57,8 @@ static const Rule rules[] = {
 	 *	WM_NAME(STRING) = title
 	 */
 	/* class      instance    title       tags mask     isfloating   monitor */
-	{ "Gimp",     NULL,       NULL,       0,            0,           -1 },
-	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
+	// { "Brave-browser",  NULL,       NULL,       1 << 0,       0,           -1 },
+	{ "Gimp",           NULL,       NULL,       0,            0,           -1 },
 };
 
 /* layout(s) */
@@ -126,11 +132,14 @@ static Key keys[] = {
 	{ MODKEY,			                  XK_space,	 zoom,		       {0} },
 /* modo ventana flotante */
 	{ MODKEY|ShiftMask,		          XK_space,	 togglefloating, {0} },
-	{ MODKEY,			                  XK_minus,	 spawn,		       SHCMD("pamixer --allow-boost -d 5; kill -44 $(pidof dwmblocks)") },
-	{ MODKEY|ShiftMask,		          XK_minus,	 spawn,		       SHCMD("pamixer --allow-boost -d 15; kill -44 $(pidof dwmblocks)") },
-	{ MODKEY,			                  XK_equal,	 spawn,		       SHCMD("pamixer --allow-boost -i 5; kill -44 $(pidof dwmblocks)") },
-	{ MODKEY|ShiftMask,		          XK_equal,	 spawn,		       SHCMD("pamixer --allow-boost -i 15; kill -44 $(pidof dwmblocks)") },
-	{ MODKEY,		                    XK_m,		   spawn,		       SHCMD("pamixer -t; kill -44 $(pidof dwmblocks)") },
+	// { MODKEY,			                  XK_minus,	 spawn,		       SHCMD("pamixer --allow-boost -d 5; kill -44 $(pidof dwmblocks); notify-send '🔈 Volume' '\-5'") },
+	{ MODKEY,			                  XK_minus,	 spawn,		       SHCMD("changevolume down; kill -44 $(pidof dwmblocks)") },
+	{ MODKEY|ShiftMask,		          XK_minus,	 spawn,		       SHCMD("pamixer --allow-boost -d 15; kill -44 $(pidof dwmblocks); notify-send '🔈 Volume' '\-15'") },
+	// { MODKEY,			                  XK_equal,	 spawn,		       SHCMD("pamixer --allow-boost -i 5; kill -44 $(pidof dwmblocks); notify-send '🔈 Volume' '+5'") },
+	{ MODKEY,			                  XK_equal,	 spawn,		       SHCMD("changevolume up; kill -44 $(pidof dwmblocks)") },
+	{ MODKEY|ShiftMask,		          XK_equal,	 spawn,		       SHCMD("pamixer --allow-boost -i 15; kill -44 $(pidof dwmblocks); notify-send '🔈 Volume' '+15'") },
+	// { MODKEY,		                    XK_m,		   spawn,		       SHCMD("pamixer -t; kill -44 $(pidof dwmblocks)") },
+	{ MODKEY,		                    XK_m,		   spawn,		       SHCMD("changevolume mute; kill -44 $(pidof dwmblocks)") },
 	{ MODKEY|ShiftMask,			        XK_m,		   spawn,		       SHCMD(TERMINAL " -e ncmpcpp") },
 	{ MODKEY,			                  XK_BackSpace,	spawn,		   SHCMD("sysact") },
 	{ MODKEY,			                  XK_r,		   spawn,		       SHCMD(TERMINAL " -e lf-image") },
