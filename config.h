@@ -132,14 +132,11 @@ static Key keys[] = {
 	{ MODKEY,			                  XK_space,	 zoom,		       {0} },
 /* modo ventana flotante */
 	{ MODKEY|ShiftMask,		          XK_space,	 togglefloating, {0} },
-	// { MODKEY,			                  XK_minus,	 spawn,		       SHCMD("pamixer --allow-boost -d 5; kill -44 $(pidof dwmblocks); notify-send '🔈 Volume' '\-5'") },
-	{ MODKEY,			                  XK_minus,	 spawn,		       SHCMD("changevolume down; kill -44 $(pidof dwmblocks)") },
-	{ MODKEY|ShiftMask,		          XK_minus,	 spawn,		       SHCMD("pamixer --allow-boost -d 15; kill -44 $(pidof dwmblocks); notify-send '🔈 Volume' '\-15'") },
-	// { MODKEY,			                  XK_equal,	 spawn,		       SHCMD("pamixer --allow-boost -i 5; kill -44 $(pidof dwmblocks); notify-send '🔈 Volume' '+5'") },
-	{ MODKEY,			                  XK_equal,	 spawn,		       SHCMD("changevolume up; kill -44 $(pidof dwmblocks)") },
-	{ MODKEY|ShiftMask,		          XK_equal,	 spawn,		       SHCMD("pamixer --allow-boost -i 15; kill -44 $(pidof dwmblocks); notify-send '🔈 Volume' '+15'") },
-	// { MODKEY,		                    XK_m,		   spawn,		       SHCMD("pamixer -t; kill -44 $(pidof dwmblocks)") },
-	{ MODKEY,		                    XK_m,		   spawn,		       SHCMD("changevolume mute; kill -44 $(pidof dwmblocks)") },
+	{ MODKEY,			                  XK_minus,	 spawn,		       SHCMD("changevolume down 5") },
+	{ MODKEY|ShiftMask,		          XK_minus,	 spawn,		       SHCMD("changevolume down 15") },
+	{ MODKEY,			                  XK_equal,	 spawn,		       SHCMD("changevolume up 5") },
+	{ MODKEY|ShiftMask,		          XK_equal,	 spawn,		       SHCMD("changevolume up 15") },
+	{ MODKEY,		                    XK_m,		   spawn,		       SHCMD("changevolume mute 5") },
 	{ MODKEY|ShiftMask,			        XK_m,		   spawn,		       SHCMD(TERMINAL " -e ncmpcpp") },
 	{ MODKEY,			                  XK_BackSpace,	spawn,		   SHCMD("sysact") },
 	{ MODKEY,			                  XK_r,		   spawn,		       SHCMD(TERMINAL " -e lf-image") },
@@ -196,8 +193,11 @@ static Key keys[] = {
 	{ 0, XF86XK_TouchpadToggle,	               spawn,          SHCMD("(synclient | grep 'TouchpadOff.*1' && synclient TouchpadOff=0) || synclient TouchpadOff=1") },
 	{ 0, XF86XK_TouchpadOff,                   spawn,          SHCMD("synclient TouchpadOff=1") },
 	{ 0, XF86XK_TouchpadOn,                    spawn,          SHCMD("synclient TouchpadOff=0") },
-	{ 0, XF86XK_MonBrightnessUp,               spawn,          SHCMD("xbacklight -inc 1") },
-	{ 0, XF86XK_MonBrightnessDown,             spawn,          SHCMD("xbacklight -dec 1") },
+  // Brightness
+	{ 0, XF86XK_MonBrightnessUp,               spawn,          SHCMD("changebrightness up 1") },
+	{ 0, XF86XK_MonBrightnessDown,             spawn,          SHCMD("changebrightness down 1") },
+	{ MODKEY, XF86XK_MonBrightnessUp,          spawn,          SHCMD("changebrightness up 5") },
+	{ MODKEY, XF86XK_MonBrightnessDown,        spawn,          SHCMD("changebrightness down 5") },
 };
 
 /* button definitions */
