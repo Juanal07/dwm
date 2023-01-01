@@ -18,7 +18,7 @@ static int smartgaps          = 0;        /* 1 means no outer gap when there is 
 static int showbar            = 1;        /* 0 means no bar */
 static int topbar             = 1;        /* 0 means bottom bar */
 
-static char *fonts[]          = { "NotoSans Nerd Font:size=10", "JoyPixels:pixelsize=18:antialias=true:autohint=true" };
+static char *fonts[]          = { "NotoSans Nerd Font:size=10", "JoyPixels:pixelsize=10:antialias=true:autohint=true" };
 static char dmenufont[]       = { "NotoSans Nerd Font:size=10" };
 
 static unsigned int systraypinning = 0;   /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
@@ -132,11 +132,11 @@ static Key keys[] = {
 	{ MODKEY,			                  XK_space,	 zoom,		       {0} },
 /* modo ventana flotante */
 	{ MODKEY|ShiftMask,		          XK_space,	 togglefloating, {0} },
-	{ MODKEY,			                  XK_minus,	 spawn,		       SHCMD("changevolume down 5") },
-	{ MODKEY|ShiftMask,		          XK_minus,	 spawn,		       SHCMD("changevolume down 15") },
-	{ MODKEY,			                  XK_equal,	 spawn,		       SHCMD("changevolume up 5") },
-	{ MODKEY|ShiftMask,		          XK_equal,	 spawn,		       SHCMD("changevolume up 15") },
-	{ MODKEY,		                    XK_m,		   spawn,		       SHCMD("changevolume mute 5") },
+	{ MODKEY,			                  XK_minus,	 spawn,		       SHCMD("change-volume down 5") },
+	{ MODKEY|ShiftMask,		          XK_minus,	 spawn,		       SHCMD("change-volume down 15") },
+	{ MODKEY,			                  XK_equal,	 spawn,		       SHCMD("change-volume up 5") },
+	{ MODKEY|ShiftMask,		          XK_equal,	 spawn,		       SHCMD("change-volume up 15") },
+	{ MODKEY,		                    XK_m,		   spawn,		       SHCMD("change-volume mute 5") },
 	{ MODKEY|ShiftMask,			        XK_m,		   spawn,		       SHCMD(TERMINAL " -e ncmpcpp") },
 	{ MODKEY,			                  XK_BackSpace,	spawn,		   SHCMD("sysact") },
 	{ MODKEY,			                  XK_r,		   spawn,		       SHCMD(TERMINAL " -e lf-image") },
@@ -160,13 +160,14 @@ static Key keys[] = {
 	{ MODKEY,			                  XK_F3,		 spawn,		       SHCMD("displayselect") },
 	{ MODKEY,			                  XK_F4,		 spawn,		       SHCMD(TERMINAL " -e pulsemixer; kill -44 $(pidof dwmblocks)") },
 	{ MODKEY,			                  XK_F5,		 xrdb,		       {.v = NULL } },
-	{ MODKEY,			                  XK_F6,		 spawn,		       SHCMD("torwrap") },
+	// { MODKEY,			                  XK_F6,		 spawn,		       SHCMD("torwrap") },
+	{ MODKEY,			                  XK_F6,		 spawn,		       SHCMD("change-monitor") },
 	{ MODKEY,			                  XK_F7,		 spawn,		       SHCMD("td-toggle") },
 	{ MODKEY,			                  XK_F8,		 spawn,		       SHCMD("mw -Y") },
 	{ MODKEY,			                  XK_F9,		 spawn,		       SHCMD("dmenumount") },
 	{ MODKEY,			                  XK_F10,		 spawn,		       SHCMD("dmenuumount") },
 	{ MODKEY,			                  XK_F11,		 spawn,		       SHCMD("mpv --no-cache --no-osc --no-input-default-bindings --profile=low-latency --input-conf=/dev/null --title=webcam $(ls /dev/video[0,2,4,6,8] | tail -n 1)") },
-	{ MODKEY,			                  XK_F12,		 spawn,		       SHCMD("remaps & notify-send \\\"⌨️ Keyboard remapping...\\\" \\\"Re-running keyboard defaults for any newly plugged-in keyboards.\\\"") },
+	{ MODKEY,			                  XK_F12,		 spawn,		       SHCMD("remaps & notify-send '⌨️ Keyboard remapping...' 'Re-running keyboard defaults for any newly plugged-in keyboards.'") },
 	{ 0, XF86XK_AudioMute,		                 spawn,		       SHCMD("pamixer -t; kill -44 $(pidof dwmblocks)") },
 	{ 0, XF86XK_AudioRaiseVolume,	             spawn,          SHCMD("pamixer --allow-boost -i 3; kill -44 $(pidof dwmblocks)") },
 	{ 0, XF86XK_AudioLowerVolume,	             spawn,          SHCMD("pamixer --allow-boost -d 3; kill -44 $(pidof dwmblocks)") },
@@ -194,10 +195,10 @@ static Key keys[] = {
 	{ 0, XF86XK_TouchpadOff,                   spawn,          SHCMD("synclient TouchpadOff=1") },
 	{ 0, XF86XK_TouchpadOn,                    spawn,          SHCMD("synclient TouchpadOff=0") },
   // Brightness
-	{ 0, XF86XK_MonBrightnessUp,               spawn,          SHCMD("changebrightness up 1") },
-	{ 0, XF86XK_MonBrightnessDown,             spawn,          SHCMD("changebrightness down 1") },
-	{ MODKEY, XF86XK_MonBrightnessUp,          spawn,          SHCMD("changebrightness up 5") },
-	{ MODKEY, XF86XK_MonBrightnessDown,        spawn,          SHCMD("changebrightness down 5") },
+	{ 0, XF86XK_MonBrightnessUp,               spawn,          SHCMD("change-brightness up 1") },
+	{ 0, XF86XK_MonBrightnessDown,             spawn,          SHCMD("change-brightness down 1") },
+	{ MODKEY, XF86XK_MonBrightnessUp,          spawn,          SHCMD("change-brightness up 5") },
+	{ MODKEY, XF86XK_MonBrightnessDown,        spawn,          SHCMD("change-brightness down 5") },
 };
 
 /* button definitions */
